@@ -1,0 +1,2 @@
+module KadaionesHelper
+end
