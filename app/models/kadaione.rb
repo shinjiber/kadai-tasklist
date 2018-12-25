@@ -1,2 +1,0 @@
-class Kadaione < ApplicationRecord
-end
