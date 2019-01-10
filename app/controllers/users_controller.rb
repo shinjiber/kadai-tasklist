@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  def index
-    @users = User.all.page(params[:Page])
-  end
+  
+  before_action :require_user_logged_in, only: [:index, :show]
+  
 
   def show
     @user = User.find(params[:id])
