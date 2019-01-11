@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :correct_user, only: [:destroy]
+  before_action :correct_user, only: [:destroy, :update, :edit]
   
   
   def new
@@ -16,11 +16,10 @@ class TasksController < ApplicationController
       redirect_to root_url
       #@task = tasks/:id
     else
-      @tasks = current_user.microposts.order('created_at DESC').page(params[:page])
+      @tasks = current_user.tasks.order('created_at DESC').page(params[:page])
       flash.now[:danger] = 'Task was not posted'
-      render 'toppages/index'
+      render 'tasks/new'
     end
-    
   end
   
   
@@ -42,10 +41,11 @@ class TasksController < ApplicationController
   
   def destroy
     @task.destroy
-    
     flash[:success] = "Task was deleted successfully"
-    redirect_to tasks_url
+    redirect_back(fallback_location: root_path)
   end
+
+
 
   private
   
