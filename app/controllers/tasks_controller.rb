@@ -1,8 +1,11 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:new, :show, :edit, :update, :destroy]
   before_action :set_task, only: [:show,:edit, :update, :destroy]
  
+  
+  def new
+  end
   
   def show
     if @task.user_id != current_user.id
